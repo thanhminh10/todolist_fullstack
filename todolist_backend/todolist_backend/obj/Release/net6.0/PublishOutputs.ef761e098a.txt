@@ -1,0 +1,11 @@
+D:\todolist_fullstack\todolist_backend\todolist_backend\obj\Release\net6.0\PubTmp\Out\todolistbackend.exe
+D:\todolist_fullstack\todolist_backend\todolist_backend\obj\Release\net6.0\PubTmp\Out\appsettings.Development.json
+D:\todolist_fullstack\todolist_backend\todolist_backend\obj\Release\net6.0\PubTmp\Out\appsettings.json
+D:\todolist_fullstack\todolist_backend\todolist_backend\obj\Release\net6.0\PubTmp\Out\todolistbackend.dll
+D:\todolist_fullstack\todolist_backend\todolist_backend\obj\Release\net6.0\PubTmp\Out\todolistbackend.deps.json
+D:\todolist_fullstack\todolist_backend\todolist_backend\obj\Release\net6.0\PubTmp\Out\todolistbackend.runtimeconfig.json
+D:\todolist_fullstack\todolist_backend\todolist_backend\obj\Release\net6.0\PubTmp\Out\todolistbackend.pdb
+D:\todolist_fullstack\todolist_backend\todolist_backend\obj\Release\net6.0\PubTmp\Out\Microsoft.OpenApi.dll
+D:\todolist_fullstack\todolist_backend\todolist_backend\obj\Release\net6.0\PubTmp\Out\Swashbuckle.AspNetCore.Swagger.dll
+D:\todolist_fullstack\todolist_backend\todolist_backend\obj\Release\net6.0\PubTmp\Out\Swashbuckle.AspNetCore.SwaggerGen.dll
+D:\todolist_fullstack\todolist_backend\todolist_backend\obj\Release\net6.0\PubTmp\Out\Swashbuckle.AspNetCore.SwaggerUI.dll
