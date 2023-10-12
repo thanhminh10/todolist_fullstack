@@ -22,6 +22,7 @@ import {
     Button,
   } from "@material-tailwind/react";
 import { sortbyAdded, todoListSelector } from '../redux/selector';
+import { getProduct } from '../api/services/todo';
 
 
   export default function Todo(item) { 
@@ -51,6 +52,17 @@ import { sortbyAdded, todoListSelector } from '../redux/selector';
     const [changeupdate, setChangeupdate] = React.useState(false);
 
 
+    const [getData, setData] =  React.useState([]);
+    // Get call from axios
+    React.useEffect(() => {
+      getProduct().then(function (response) {
+        
+        setData(response.data);
+      });
+    }, []);
+
+
+    console.log(getData);
 
     React.useEffect(()=>{
         const { id,name,completed,deadline,currentday } =  item.item;
@@ -62,9 +74,6 @@ import { sortbyAdded, todoListSelector } from '../redux/selector';
     })
 
 
-
-    const a = sortbyAdded(useSelector(todoListSelector))
-    console.log(a);
     // useDispatch 
     const dispatch =  useDispatch();
 
