@@ -1,53 +1,27 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using todolist_BE.Models;
-
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using todolist_BE.Data;
+using todolist_BE.Data.Entities;
 
 namespace todolist_BE.Controllers
 {
     [Route("v1/api/[controller]")]
     [ApiController]
-    public class TodoController : ControllerBase
+    public class TodoController : Controller
     {
-        // GET: api/<TodoController>
-           private readonly TodoContext _dbContext;
-        // Construtor
-        public TodoController(TodoContext dbContext)
+        protected readonly TodoContext _todo;
+
+        public TodoController(TodoContext todo)
         {
-            _dbContext = dbContext;
+            _todo = todo;
         }
 
-        // Get v1/api/<TodoController>
+
         [HttpGet]
-
-        public async Task<ActionResult<IEnumerable<Todo>>> GetTodos()
+        public IEnumerable<Todo> Get()
         {
-            if(_dbContext.Todos == null)
-            {
-                return NotFound();
-            }
-            return await _dbContext.Todos.ToListAsync();
-
-
+            return  _todo.Todos;
         }
-        [HttpGet]
-        public async Task<ActionResult<Todo>> GetTodo(int id)
-        {
-            if (_dbContext.Todos == null)
-            {
-                return NotFound();
-            }
-
-            var todo = await _dbContext.Todos.FindAsync(id);
-
-            if(todo == null)
-            {
-                return NotFound();
-            }
-            return todo;
-        }
-
 
 
     }

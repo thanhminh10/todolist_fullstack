@@ -62,7 +62,7 @@ import { getProduct } from '../api/services/todo';
     }, []);
 
 
-    console.log(getData);
+   
 
     React.useEffect(()=>{
         const { id,name,completed,deadline,currentday } =  item.item;

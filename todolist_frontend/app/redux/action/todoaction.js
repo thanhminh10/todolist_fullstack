@@ -36,3 +36,47 @@ export const update_by_ID =  (data)=>{
         payload:data,
     }
 }
+
+
+
+
+export const GetUsers = () => {
+    console.log("GetUsers");
+
+    return dispatch => {
+        console.log("GetUsers dispatch");
+
+        axios.get(process.env.NEXT_PUBLIC_TODOAPI)
+        .then(res => {
+            const persons = res.data;
+
+            dispatch({
+                type: 'Todolist/get',
+                users: response
+            });
+        })
+    };
+};
+
+export const AddUser = (params) => {
+    console.log("AddUser");
+
+    return dispatch => {
+        console.log("Add User dispatch");
+
+        axios.post(`https://reqres.in/api/users`, {params})
+        .then(response => {
+            console.log(response);
+
+            axios.get(`https://reqres.in/api/users`)
+            .then(res => {
+                console.log(res);
+
+                dispatch({
+                    type: GET_USERS,
+                    users: response
+                });
+            })
+        })
+    };
+};

@@ -101,7 +101,8 @@ export const remainingSeach = createSelector(
     (todoList, searchtext ,filter_status,sortSelector) =>  {
         if(sortSelector ==="Added date")
         {
-            return sortbyAdded(todoList.filter((todo)=>{
+            console.log(todoList);
+            return sortbyAdded(todoList.Todo.filter((todo)=>{
                 if(filter_status==='All'){
                     return todo.name.includes(searchtext)
                 }
@@ -111,7 +112,7 @@ export const remainingSeach = createSelector(
             }))
         }
         else {
-            return sortbydeadline(todoList.filter((todo)=>{
+            return sortbydeadline(todoList.Todo.filter((todo)=>{
                 if(filter_status==='All'){
                     return todo.name.includes(searchtext)
                 }
