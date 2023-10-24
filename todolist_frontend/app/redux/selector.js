@@ -37,12 +37,12 @@ export const sortbyAdded = (todo) => {
 
         
         for (let j = i + 1; j < todo.length; j++) {
-            date1 =  new Date(todo[currentValueNewIndex].currentday.string);
-            date2 = new Date(todo[j].currentday.string);
+            date1 =  new Date(todo[currentValueNewIndex].currentDay.string);
+            date2 = new Date(todo[j].currentDay.string);
             if (
                 date1 > date2
             ) {
-                console.log(date1 ,date2);
+                // console.log(date1 ,date2);
                 currentValueNewIndex = j;
             }
         }
@@ -71,7 +71,7 @@ export const sortbydeadline = (todo) => {
             if (
                 date1 > date2
             ) {
-                console.log(date1 ,date2);
+                // console.log(date1 ,date2);
                 currentValueNewIndex = j;
             }
         }
@@ -101,7 +101,7 @@ export const remainingSeach = createSelector(
     (todoList, searchtext ,filter_status,sortSelector) =>  {
         if(sortSelector ==="Added date")
         {
-            console.log(todoList);
+            // console.log(todoList);
             return sortbyAdded(todoList.Todo.filter((todo)=>{
                 if(filter_status==='All'){
                     return todo.name.includes(searchtext)

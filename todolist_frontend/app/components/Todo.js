@@ -22,7 +22,8 @@ import {
     Button,
   } from "@material-tailwind/react";
 import { sortbyAdded, todoListSelector } from '../redux/selector';
-import { getProduct } from '../api/services/todo';
+
+
 
 
   export default function Todo(item) { 
@@ -30,9 +31,9 @@ import { getProduct } from '../api/services/todo';
     var todoitem_default =  {
         id:0,
         name:'',
-        deadline:{},
+        deadline:'',
         completed:false,
-        currentday:{}
+        currentDay:''
     }
 
     
@@ -46,31 +47,24 @@ import { getProduct } from '../api/services/todo';
 
 
     const [deadline, setDeadline] = React.useState(todoitem_default.deadline);
-    const [currentday, setCurrentday] = React.useState(todoitem_default.currentday);
+    const [currentday, setCurrentday] = React.useState(todoitem_default.currentDay);
 
 
     const [changeupdate, setChangeupdate] = React.useState(false);
 
 
-    const [getData, setData] =  React.useState([]);
-    // Get call from axios
-    React.useEffect(() => {
-      getProduct().then(function (response) {
-        
-        setData(response.data);
-      });
-    }, []);
-
+   
+ 
 
    
 
     React.useEffect(()=>{
-        const { id,name,completed,deadline,currentday } =  item.item;
+        const { id,name,completed,deadline,currentDay } =  item.item;
         setName(name);
         setId(id);
         setCompleted(completed);
         setDeadline(deadline);
-        setCurrentday(currentday)
+        setCurrentday(currentDay)
     })
 
 
@@ -116,12 +110,7 @@ import { getProduct } from '../api/services/todo';
             const data =  {
             id:id,
             completed:changeupdate,
-            deadline: {
-                string:`${updateDay.$y}-${updateDay.$M+1}-${updateDay.$D}`,
-                day:updateDay.$D,
-                month:updateDay.$M+1,
-                year:updateDay.$y,
-            },  
+            deadline: '',
             name:name,  
             currentday:currentday
             }
@@ -154,14 +143,14 @@ import { getProduct } from '../api/services/todo';
                  </div>
                 </ListItemButton>
                 <div className='p-2 flex items-center justify-center mr-5'>
-                    <Button variant="text" className='text-orange-500 flex items-center justify-center'><FontAwesomeIcon icon={faClock} className='m-1'/>{deadline.string}</Button>
+                    <Button variant="text" className='text-orange-500 flex items-center justify-center'><FontAwesomeIcon icon={faClock} className='m-1'/>{deadline}</Button>
                 </div>
                 <div className='todo-detail flex flex-col justify-end'>
                     <ListItemIcon className='group_action flex flex-row justify-end'>
                         <FontAwesomeIcon icon={faPen}  className='group_action__item blue cursor-pointer' onClick={handleClickOpen_UpdateDialog}/>
                         <FontAwesomeIcon icon={faTrash} className='group_action__item red cursor-pointer' onClick={handleClickOpen_DeleteDialog}/>
                     </ListItemIcon>
-                    <ListItemText primary={currentday.string} className='text-gray-500' />
+                    <ListItemText primary={currentday} className='text-gray-500' />
                 </div>
                 <DraggableDialog open={open}
                     handleClose={handleClose}

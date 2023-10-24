@@ -7,7 +7,7 @@
 
         public bool Completed{ get; set; }
         
-        public string CreatedDate { get; set; }
+        public string CurrentDay { get; set; }
 
         public string Deadline { get; set; }
 
