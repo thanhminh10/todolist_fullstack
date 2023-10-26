@@ -1,15 +1,14 @@
-
-export const GET_TODO_LIST_STARTED = 'GET_USER_LIST_STARTED';
-// get user list - success
-export const GET_TODO_LIST_SUCCESS = 'GET_USER_LIST_SUCCESS';
-// get user list - failure
-export const GET_TODO_LIST_FAILURE = 'GET_USER_LIST_FAILURE';
-/*---------------------------------------------------------------- */
-export const POST_TODO_LIST_STARTED = ' POST_USER_LIST_STARTED';
-// post user list - success
-export const POST_TODO_LIST_SUCCESS = 'POST_USER_LIST_SUCCESS';
-// post user list - failure
-export const POST_TODO_LIST_FAILURE = 'POST_USER_LIST_FAILURE';
+import { 
+  GET_TODO_LIST_STARTED,
+  GET_TODO_LIST_SUCCESS,
+  GET_TODO_LIST_FAILURE,
+  POST_TODO_LIST_STARTED,
+  POST_TODO_LIST_SUCCESS,
+  POST_TODO_LIST_FAILURE,
+  REMOVE_TODO_LIST_STARTED,
+  REMOVE_TODO_LIST_SUCCESS,
+  REMOVE_TODO_LIST_FAILURE, 
+} from "../actiontype"
 
 export const getTodoListStarted = () => {
     return {
@@ -38,8 +37,6 @@ export const getTodoListStarted = () => {
   }
 
 
-
-
   export const postTodoListStarted = () => {
     return {
       type: POST_TODO_LIST_STARTED,
@@ -62,3 +59,29 @@ export const getTodoListStarted = () => {
         }
       }
     }
+
+
+
+
+    export const removeTodoListStarted = () => {
+      return {
+        type: REMOVE_TODO_LIST_STARTED,
+      }
+    }
+      // to REMOVE the list of users - success
+      export const removeTodoListSuccess = data => {
+        return {
+          type: REMOVE_TODO_LIST_SUCCESS,
+          payload: {
+            REMOVEdata:data
+          }
+        }
+      }
+    export const removeTodoListFailure = err => {
+        return {
+          type: REMOVE_TODO_LIST_FAILURE,
+          payload: {
+            err
+          }
+        }
+      }

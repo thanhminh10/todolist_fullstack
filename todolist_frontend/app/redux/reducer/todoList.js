@@ -5,7 +5,7 @@ GET_TODO_LIST_FAILURE,
 POST_TODO_LIST_STARTED,
 POST_TODO_LIST_SUCCESS,
 POST_TODO_LIST_FAILURE,
-} from '../action/todoCallApi'
+} from '../actiontype'
 
 
 const initState = {
@@ -13,7 +13,6 @@ const initState = {
     loading : false,
     error: null,
     data:null
-
 }
 
 
@@ -42,9 +41,6 @@ const todoListReducer = (state = initState, action) => {
                   error
                 }
            
-    
-
-
         case POST_TODO_LIST_STARTED:
             
             return {
@@ -123,4 +119,4 @@ const todoListReducer = (state = initState, action) => {
     }
 };
   
-  export default todoListReducer;
+export default todoListReducer;

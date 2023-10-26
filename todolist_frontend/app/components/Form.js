@@ -12,7 +12,7 @@ import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { DateCalendar } from '@mui/x-date-pickers/DateCalendar';
 import dayjs from 'dayjs';
 import { getMonthName } from './func';
-import { postTodoList } from "../redux/asyncAction/todoAsyncActions";
+import { postTodoList } from "../redux/asyncAction/todoPOST_AsyncActions";
 
 export default function Form() {
     const dispatch =  useDispatch();
