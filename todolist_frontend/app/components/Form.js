@@ -12,6 +12,7 @@ import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { DateCalendar } from '@mui/x-date-pickers/DateCalendar';
 import dayjs from 'dayjs';
 import { getMonthName } from './func';
+import { postTodoList } from "../redux/asyncAction/todoAsyncActions";
 
 export default function Form() {
     const dispatch =  useDispatch();
@@ -23,52 +24,47 @@ export default function Form() {
     const current = new Date();
     const datestring = `${current.getDate()}/${current.getMonth()+1}/${current.getFullYear()}`;
     
-
+    
     // Dispatch  Add Todo
     const handleSubmit=(e)=>{
       if(dayvalue.$D && dayvalue.$M && dayvalue.$y)
-        dispatch(addTodo({
-          name:todoValue,
-          completed:false,
-          id:uuid(),
-          deadline: 
-          {
-            string :`${dayvalue.$y}-${dayvalue.$M+1}-${dayvalue.$D}`,
-            day:dayvalue.$D ,
-            month:dayvalue.$M+1 , 
-            year: dayvalue.$y,
-          },
-          currentday:{
-            string:datestring,
-            day: current.getDate(),
-            month: current.getMonth()+1,
-            year: current.getFullYear(),
-          },
-        }
-        ))
-        else {
-          dispatch(addTodo({
+          dispatch(postTodoList({
             name:todoValue,
             completed:false,
             id:uuid(),
-            deadline:  {
-              string :``,
-              day:0,
-              month:0, 
-              year: 0,
-            },
-            currentday:{
-              string:datestring,
-              day: current.getDate(),
-              month: current.getMonth()+1,
-              year: current.getFullYear(),
-            },
-          }
-          ))
-        }
+            deadline:`${dayvalue.$D}/${dayvalue.$M+1}/ ${dayvalue.$y}`,
+            currentday:`${datestring}`,
+        }))
+      else { 
+        dispatch(postTodoList({
+          name:todoValue,
+          completed:false,
+          id:uuid(),
+          deadline:``,
+          currentday:`${datestring}`,
+        }))
+      }
+        // dispatch(addTodo({
+        //   name:todoValue,
+        //   completed:false,
+        //   id:uuid(),
+        //   deadline:`${dayvalue.$y}/${dayvalue.$M+1}/${dayvalue.$D}`,
+        //   currentday:`${datestring}`,
+        // }
+        // ))
+        // else {
+        //   dispatch(addTodo({
+        //     name:todoValue,
+        //     completed:false,
+        //     id:uuid(),
+        //     deadline:  ``,
+        //     currentday:`${datestring}`
+        //   }
+        //   ))
+        // }
+
         e.preventDefault();
         setTodoValue('')
-      
     }
 
 

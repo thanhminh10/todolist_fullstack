@@ -2,6 +2,9 @@ import {
     GET_TODO_LIST_STARTED,
 GET_TODO_LIST_SUCCESS,
 GET_TODO_LIST_FAILURE,
+POST_TODO_LIST_STARTED,
+POST_TODO_LIST_SUCCESS,
+POST_TODO_LIST_FAILURE,
 } from '../action/todoCallApi'
 
 
@@ -21,8 +24,6 @@ const todoListReducer = (state = initState, action) => {
 
     switch (action.type) {
         case GET_TODO_LIST_STARTED:
-
-
             return {
                 ...state,
                 loading: true
@@ -41,12 +42,40 @@ const todoListReducer = (state = initState, action) => {
                   error
                 }
            
+    
+
+
+        case POST_TODO_LIST_STARTED:
+            
+            return {
+                ...state,
+                loading: true
+            }
+        case POST_TODO_LIST_SUCCESS:
+            const  { postdata } =  action.payload;
+            console.log(postdata);
+            todotmp.Todo.push(postdata);
+            return {
+                ...todotmp,
+                loading: false
+            }
+
+        case POST_TODO_LIST_FAILURE:
+              
+                return {
+                  
+                }
+           
         case 'todoList/addTodo':
             todotmp.Todo.push(action.payload);
-
+            console.log(todotmp);
         return{
             ...todotmp
         } ;
+
+
+
+
         
        
 
