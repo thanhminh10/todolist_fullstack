@@ -15,7 +15,7 @@ namespace todolist_BE.Controllers
 
         public TodoController(TodoContext todo)
         {
-            _todo = todo;
+            this._todo = todo;
         }
 
 
@@ -76,6 +76,34 @@ namespace todolist_BE.Controllers
 
             await _todo.SaveChangesAsync();
             return Ok();
+        }
+
+
+
+        [HttpPut("{id}")]
+        public async Task<ActionResult<Todo>> UpdateTodo(string id, [FromBody]Todo todo)
+        {
+            try
+            {
+                var tmp = await _todo.Todos.FindAsync(id);
+          
+                if (tmp == null)
+                    return NotFound($"Employee with Id = {id} not found");
+
+
+                tmp.Name = todo.Name;
+                tmp.Completed = todo.Completed;
+                tmp.CurrentDay  = todo.CurrentDay;
+                tmp.Deadline = todo.Deadline;
+
+                await _todo.SaveChangesAsync();
+                return Ok(tmp);
+            }
+            catch (Exception)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError,
+                    "Error updating data");
+            }
         }
 
     }
