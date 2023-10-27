@@ -101,10 +101,9 @@ export const remainingSeach = createSelector(
     (todoList, searchtext ,filter_status,sortSelector) =>  {
         if(sortSelector ==="Added date")
         {
-            // console.log(todoList);
+           
             return sortbyAdded(todoList.Todo.filter((todo)=>{
                 if(filter_status==='All'){
-                   
                     return todo.name.includes(searchtext)
                 }
                 else {

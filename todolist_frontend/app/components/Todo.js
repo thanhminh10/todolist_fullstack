@@ -22,6 +22,7 @@ import {
     Button,
   } from "@material-tailwind/react";
 import { sortbyAdded, todoListSelector } from '../redux/selector';
+import { REMOVETodoList_byID } from '../redux/asyncAction/todoREMOVE_AsyncActions';
 
 
 
@@ -95,7 +96,8 @@ import { sortbyAdded, todoListSelector } from '../redux/selector';
     const handleSubscribe = (id) => {
         // Dispatch your action here
         // For example, dispatch(subscribeAction());
-        dispatch(remove_by_ID(id))
+      
+        dispatch(REMOVETodoList_byID(id))
         handleClose();
     };
     

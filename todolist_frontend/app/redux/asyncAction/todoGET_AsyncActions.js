@@ -3,7 +3,7 @@ import {
     getTodoListSuccess,
     getTodoListFailure,
   } from "../action/todoCallApi";
-  import axios from "axios";
+ 
   
   // get user list
   export const getTodoList = () => async dispatch => {
