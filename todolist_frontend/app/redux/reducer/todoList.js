@@ -8,6 +8,9 @@ POST_TODO_LIST_FAILURE,
 REMOVE_TODO_LIST_SUCCESS,
 REMOVE_TODO_LIST_STARTED,
 REMOVE_TODO_LIST_FAILURE,
+REMOVE_ALL_TODO_LIST_STARTED,
+REMOVE_ALL_TODO_LIST_SUCCESS,
+REMOVE_ALL_TODO_LIST_FAILURE,
 } from '../actiontype'
 
 
@@ -73,7 +76,7 @@ const todoListReducer = (state = initState, action) => {
                     loading: true
                 }
         case REMOVE_TODO_LIST_SUCCESS:
-            console.log(action.payload);
+          
             todotmp.Todo.forEach((item,id) =>  {
                 if(`${item.id}` == `${action.payload.REMOVEdata}`) {
                     
@@ -91,19 +94,30 @@ const todoListReducer = (state = initState, action) => {
                       
                     }
         
-           
-        case 'todoList/addTodo':
-            todotmp.Todo.push(action.payload);
-            console.log(todotmp);
-        return{
-            ...todotmp
-        } ;
 
 
-
-
+        case REMOVE_ALL_TODO_LIST_STARTED:
+            
+                    return {
+                        ...state,
+                        loading: true
+                    }
+        case REMOVE_ALL_TODO_LIST_SUCCESS:
+              
+                todotmp.Todo =  []
+                    return {
+                        ...todotmp,
+                        loading: false
+                }
         
-       
+        case REMOVE_ALL_TODO_LIST_FAILURE:
+                      
+                        return {
+                          
+                        }
+
+
+
 
     case 'todoList/remove_by_ID':
 

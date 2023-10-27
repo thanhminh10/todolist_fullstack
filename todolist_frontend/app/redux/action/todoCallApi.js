@@ -7,7 +7,10 @@ import {
   POST_TODO_LIST_FAILURE,
   REMOVE_TODO_LIST_STARTED,
   REMOVE_TODO_LIST_SUCCESS,
-  REMOVE_TODO_LIST_FAILURE, 
+  REMOVE_TODO_LIST_FAILURE,
+  REMOVE_ALL_TODO_LIST_STARTED,
+  REMOVE_ALL_TODO_LIST_SUCCESS,
+  REMOVE_ALL_TODO_LIST_FAILURE, 
 } from "../actiontype"
 
 export const getTodoListStarted = () => {
@@ -80,6 +83,32 @@ export const getTodoListStarted = () => {
     export const removeTodoListFailure = err => {
         return {
           type: REMOVE_TODO_LIST_FAILURE,
+          payload: {
+            err
+          }
+        }
+      }
+
+
+
+      
+    export const removeAllTodoListStarted = () => {
+      return {
+        type: REMOVE_ALL_TODO_LIST_STARTED,
+      }
+    }
+      // to REMOVE the list of users - success
+      export const removeAllTodoListSuccess = data => {
+        return {
+          type: REMOVE_ALL_TODO_LIST_SUCCESS,
+          payload: {
+            REMOVEdata:data
+          }
+        }
+      }
+    export const removeAllTodoListFailure = err => {
+        return {
+          type: REMOVE_ALL_TODO_LIST_FAILURE,
           payload: {
             err
           }

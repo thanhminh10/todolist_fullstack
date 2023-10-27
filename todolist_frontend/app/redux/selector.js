@@ -101,15 +101,16 @@ export const remainingSeach = createSelector(
     (todoList, searchtext ,filter_status,sortSelector) =>  {
         if(sortSelector ==="Added date")
         {
-           
-            return sortbyAdded(todoList.Todo.filter((todo)=>{
-                if(filter_status==='All'){
-                    return todo.name.includes(searchtext)
-                }
-                else {
-                    return todo.name.includes(searchtext) && checkstatus(filter_status,todo);
-                }
-            }))
+           if(todoList) {
+               return sortbyAdded(todoList.Todo.filter((todo)=>{
+                   if(filter_status==='All'){
+                       return todo.name.includes(searchtext)
+                   }
+                   else {
+                       return todo.name.includes(searchtext) && checkstatus(filter_status,todo);
+                   }
+               }))
+           }
         }
         else {
             return sortbydeadline(todoList.Todo.filter((todo)=>{

@@ -12,6 +12,7 @@ import { remove_All } from "../redux/action/todoaction";
 import { useDispatch,useSelector } from "react-redux";
 import { searchfilter, statusfilter,sortfilter } from "../redux/action/filteraction";
 import { filterSelector_status,sortSelector } from "../redux/selector";
+import { REMOVETodoList_ALL } from "../redux/asyncAction/todoREMOVE_ALL_AsyncActions";
 export default function Filter() {
     const status =useSelector(filterSelector_status);
     const sortby =useSelector(sortSelector);
@@ -42,7 +43,7 @@ export default function Filter() {
     const handleSubscribe = () => {
         // Dispatch your action here
         // For example, dispatch(subscribeAction());
-        dispatch(remove_All())
+        dispatch(REMOVETodoList_ALL())
         handleClose();
     };
 
