@@ -23,8 +23,9 @@ import {
   } from "@material-tailwind/react";
 import { sortbyAdded, todoListSelector } from '../redux/selector';
 import { REMOVETodoList_byID } from '../redux/asyncAction/todoREMOVE_AsyncActions';
-
-
+import { Toggle_byID } from '../redux/asyncAction/Toggle_AsyncActions';
+import { Update_byID } from '../redux/asyncAction/Update_AsyncActions';
+import { Input } from "@material-tailwind/react";
 
 
   export default function Todo(item) { 
@@ -40,7 +41,9 @@ import { REMOVETodoList_byID } from '../redux/asyncAction/todoREMOVE_AsyncAction
     
     const [open, setOpen] = React.useState(false);
     const [openupdate, setOpenupdate] = React.useState(false);
-    const [updateDay, setUpdateDay] = React.useState(dayjs('2023-06-08'));
+    const [updateDay, setUpdateDay] = React.useState(dayjs(''));
+    const [updatename, setUpdateName] = React.useState('');
+
     const [name, setName] = React.useState(todoitem_default.name);
 
     const [id, setId] = React.useState(todoitem_default.id);
@@ -54,7 +57,7 @@ import { REMOVETodoList_byID } from '../redux/asyncAction/todoREMOVE_AsyncAction
     const [changeupdate, setChangeupdate] = React.useState(false);
 
 
-   
+ 
  
 
    
@@ -102,30 +105,51 @@ import { REMOVETodoList_byID } from '../redux/asyncAction/todoREMOVE_AsyncAction
     };
     
     const handleCheck = (id,state) => {
-        const tmp  = state;
-        
-    
-        dispatch(toggle_check_by_ID({todo_id:id,completed:tmp}));
-    };
-  
-    const handleUpdate = (id) => {
-            const data =  {
+        const data =  {
             id:id,
-            completed:changeupdate,
+            completed:state,
             deadline: '',
             name:name,  
             currentday:currentday
+        }
+        dispatch(Toggle_byID({todo_id:id,data:data}));
+    };
+  
+    const handleUpdate = (id) => {
+            if(updateDay.$y && updateDay.$M && updateDay.$D )
+            {
+
+                const data =  {
+                id:id,
+                completed:changeupdate,
+                deadline: `${updateDay.$D}/${updateDay.$M}/${updateDay.$y}`,
+                name:updatename,  
+                currentday:currentday
+                }
+                dispatch(Update_byID({updateid:id,data:data})); 
+                handleClose_UpdateDialog();    
             }
-            dispatch(update_by_ID({updateid:id,data:data})); 
-            handleClose_UpdateDialog();    
+            else {
+                const data =  {
+                    id:id,
+                    completed:changeupdate,
+                    deadline: '',
+                    name:updatename,  
+                    currentday:currentday
+                    }
+                    dispatch(Update_byID({updateid:id,data:data})); 
+                    handleClose_UpdateDialog();  
+            }
     };
 
     const handleChange = (a) => {
         setChangeupdate(a);
     };
 
-    const handleChangeName = (event) => {
-        setName(event.target.value);
+    const handleChangeName = (nameupdate) => {
+    
+        setUpdateName(nameupdate);
+      
     };
     
 
@@ -177,7 +201,16 @@ import { REMOVETodoList_byID } from '../redux/asyncAction/todoREMOVE_AsyncAction
                                 <span class="after:content-['*'] after:ml-0.5 after:text-red-500 block text-sm font-medium text-slate-700">
                                     Todo
                                 </span>
-                                <input onChange={(e)=>handleChangeName(e)}  type="text" name="Todo" class="mt-1 px-3 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block w-full rounded-md sm:text-sm focus:ring-1" placeholder={name} />
+                                <Input
+                                placeholder="Name"
+                                className="pr-20 w-full h-full border-neutral-600  outline-none  shadow-none  text-x"
+                                containerProps={{
+                                className: "min-w-0 h-full bg-none outline-none border-none shadow-none",
+                                }}
+                                autoFocus={true}
+                                value={updatename}
+                                onChange={(e) => handleChangeName(e.target.value)}
+                                />
                             </label>
                           </div>
                           <div class="block mb-5">

@@ -11,6 +11,12 @@ REMOVE_TODO_LIST_FAILURE,
 REMOVE_ALL_TODO_LIST_STARTED,
 REMOVE_ALL_TODO_LIST_SUCCESS,
 REMOVE_ALL_TODO_LIST_FAILURE,
+TOGGLE_TODO_LIST_STARTED,
+TOGGLE_TODO_LIST_SUCCESS,
+TOGGLE_TODO_LIST_FAILURE,
+UPDATE_LIST_STARTED,
+UPDATE_LIST_SUCCESS,
+UPDATE_LIST_FAILURE,
 } from '../actiontype'
 
 
@@ -86,13 +92,14 @@ const todoListReducer = (state = initState, action) => {
                 return {
                     ...todotmp,
                     loading: false
-            }
+        
+                }
     
         case REMOVE_TODO_LIST_FAILURE:
                   
-                    return {
+            return {
                       
-                    }
+        }
         
 
 
@@ -109,55 +116,82 @@ const todoListReducer = (state = initState, action) => {
                         ...todotmp,
                         loading: false
                 }
-        
+
         case REMOVE_ALL_TODO_LIST_FAILURE:
-                      
-                        return {
+                  
+            return {
                           
-                        }
+        }       
+        
+        case TOGGLE_TODO_LIST_STARTED:
+                      
+            return { ...state,
+                loading: true}
 
-
-
-
-    case 'todoList/remove_by_ID':
-
-        todotmp.Todo.forEach((item,id) =>  {
-            if(item.id == action.payload) {
-                todotmp.Todo.splice(id, 1)
+        case TOGGLE_TODO_LIST_SUCCESS:
+            const {toggle_data} =  action.payload;
+            todotmp.Todo.forEach((element,id) => {
+                
+                if(`${element.id}` == `${toggle_data.id}`) {
+                    todotmp.Todo[id].completed = toggle_data.completed;
+                }
+            });
+            console.log(todotmp.Todo);
+            return {
+                    ...todotmp,
+                    loading: false
             }
-        })
-        return{...todotmp}
-       
-    case 'todoList/remove_All':    
-        todotmp.Todo =  []
-        return {
-            ...todotmp
-        }   
-    case 'todoList/toggle_check_by_ID':  
+        case TOGGLE_TODO_LIST_FAILURE:
+                  
+           
+                return {
+                    ...todotmp,
+                    loading: false
+            }
+            
+
+
+        /*------------------------------*/
+        case UPDATE_LIST_STARTED:
+                      
+            return { ...state,
+                loading: true}
+
+        case UPDATE_LIST_SUCCESS:
+            const {update_data} =  action.payload;
+            console.log(action.payload);
+            todotmp.Todo.forEach((element,id) => {
+                
+                if(`${element.id}` == `${update_data.id}`) {
+                    todotmp.Todo[id].name = update_data.name;
+                    todotmp.Todo[id].completed = update_data.completed;
+                    todotmp.Todo[id].currentday = update_data.currentday;
+                    todotmp.Todo[id].deadline = update_data.deadline;
+                }
+            });
+            return {
+                    ...todotmp,
+                    loading: false
+            }
+        case UPDATE_LIST_FAILURE:
+                  
+           
+                return {
+                    ...todotmp,
+                    loading: false
+            }
+   
+
+
+
+    // case 'todoList/toggle_check_by_ID':  
      
-        const {todo_id, completed} = action.payload;
-        todotmp.Todo.forEach((item,id) =>  {
-            if(item.id == todo_id) {
-                todotmp.Todo[id].completed = completed;
-            }
-        })
+      
        
         
-        return {
-            ...todotmp
-        };
-    case 'todoList/update_by_ID':  
-        const {updateid, data} = action.payload;
-        todotmp.Todo.forEach((item ,id) =>  {
-            if(item.id == updateid) {
-                todotmp.Todo[id].completed = data.completed;
-                todotmp.Todo[id].name = data.name;
-                todotmp.Todo[id].deadline = data.deadline;
-            }
-        })
-        return{
-            ...todotmp
-        };
+    //     return {
+    //         ...todotmp
+    //     };
       default:
         return state;
     }

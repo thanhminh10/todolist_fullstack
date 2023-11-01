@@ -36,3 +36,20 @@ export const REMOVE_ALL_TODO_LIST_SUCCESS = 'REMOVE_ALL_LIST_SUCCESS';
 export const REMOVE_ALL_TODO_LIST_FAILURE = 'REMOVE_ALL_LIST_FAILURE';
 
 
+
+
+
+export const TOGGLE_TODO_LIST_STARTED = 'TOGGLE_LIST_STARTED';
+// REMOVE user list - success
+export const TOGGLE_TODO_LIST_SUCCESS = 'TOGGLE_LIST_SUCCESS';
+// REMOVE user list - failure
+export const TOGGLE_TODO_LIST_FAILURE = 'TOGGLE_LIST_FAILURE';
+
+
+
+
+export const UPDATE_LIST_STARTED = 'UPDATE_LIST_STARTED';
+// REMOVE user list - success
+export const UPDATE_LIST_SUCCESS = 'UPDATE_LIST_SUCCESS';
+// REMOVE user list - failure
+export const UPDATE_LIST_FAILURE = 'UPDATE_LIST_FAILURE';

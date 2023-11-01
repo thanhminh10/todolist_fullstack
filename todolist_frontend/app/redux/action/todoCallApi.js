@@ -10,8 +10,17 @@ import {
   REMOVE_TODO_LIST_FAILURE,
   REMOVE_ALL_TODO_LIST_STARTED,
   REMOVE_ALL_TODO_LIST_SUCCESS,
-  REMOVE_ALL_TODO_LIST_FAILURE, 
+  REMOVE_ALL_TODO_LIST_FAILURE,
+  TOGGLE_TODO_LIST_STARTED,
+  TOGGLE_TODO_LIST_SUCCESS,
+  TOGGLE_TODO_LIST_FAILURE,
+  UPDATE_LIST_STARTED,
+  UPDATE_LIST_SUCCESS,
+  UPDATE_LIST_FAILURE, 
 } from "../actiontype"
+
+/*-----------------------GET TODO----------------------- */
+
 
 export const getTodoListStarted = () => {
     return {
@@ -39,6 +48,8 @@ export const getTodoListStarted = () => {
     }
   }
 
+/*-----------------------ADD TODO----------------------- */
+
 
   export const postTodoListStarted = () => {
     return {
@@ -64,6 +75,7 @@ export const getTodoListStarted = () => {
     }
 
 
+/*-----------------------REMOVE BY ID----------------------- */
 
 
     export const removeTodoListStarted = () => {
@@ -91,6 +103,7 @@ export const getTodoListStarted = () => {
 
 
 
+/*-----------------------REMOVE ALL----------------------- */
       
     export const removeAllTodoListStarted = () => {
       return {
@@ -114,3 +127,54 @@ export const getTodoListStarted = () => {
           }
         }
       }
+
+
+
+/*-----------------------TOGGLE----------------------- */
+
+      export const toggleTodoListStarted = () => {
+        return {
+          type: TOGGLE_TODO_LIST_STARTED,
+        }
+      }
+        // to REMOVE the list of users - success
+        export const toggleTodoListSuccess = data => {
+          return {
+            type: TOGGLE_TODO_LIST_SUCCESS,
+            payload: {
+              toggle_data:data
+            }
+          }
+        }
+      export const toggleTodoListFailure = err => {
+          return {
+            type: TOGGLE_TODO_LIST_FAILURE,
+            payload: {
+              err
+            }
+          }
+        }
+/*-----------------------TOGGLE----------------------- */
+
+export const updateTodoListStarted = () => {
+  return {
+    type: UPDATE_LIST_STARTED,
+  }
+}
+  // to REMOVE the list of users - success
+  export const updateTodoListSuccess = data => {
+    return {
+      type: UPDATE_LIST_SUCCESS,
+      payload: {
+        update_data:data
+      }
+    }
+  }
+export const updateTodoListFailure = err => {
+    return {
+      type: UPDATE_LIST_FAILURE,
+      payload: {
+        err
+      }
+    }
+  }

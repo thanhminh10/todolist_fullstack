@@ -79,6 +79,32 @@ namespace todolist_BE.Controllers
         }
 
 
+        [HttpPut("toggle/{id}")]
+        public async Task<ActionResult<Todo>> Toggle(string id, [FromBody]Todo todo)
+        {
+            try
+            {
+                var tmp = await _todo.Todos.FindAsync(id);
+
+                if (tmp == null)
+                    return NotFound($"Employee with Id = {id} not found");
+                    tmp.Name = todo.Name;
+                    tmp.Completed = todo.Completed;
+                    tmp.CurrentDay = todo.CurrentDay;
+                    tmp.Deadline = todo.Deadline;
+
+                    await _todo.SaveChangesAsync();
+                    return Ok(tmp);
+            }
+            catch (Exception)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError,
+                    "Error updating data");
+            }
+            
+        }
+
+
 
         [HttpPut("{id}")]
         public async Task<ActionResult<Todo>> UpdateTodo(string id, [FromBody]Todo todo)
@@ -94,6 +120,32 @@ namespace todolist_BE.Controllers
                 tmp.Name = todo.Name;
                 tmp.Completed = todo.Completed;
                 tmp.CurrentDay  = todo.CurrentDay;
+                tmp.Deadline = todo.Deadline;
+
+                await _todo.SaveChangesAsync();
+                return Ok(tmp);
+            }
+            catch (Exception)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError,
+                    "Error updating data");
+            }
+        }
+
+        [HttpPut("Update/{id}")]
+        public async Task<ActionResult<Todo>> UpdateForm(string id, [FromBody] Todo todo)
+        {
+            try
+            {
+                var tmp = await _todo.Todos.FindAsync(id);
+
+                if (tmp == null)
+                    return NotFound($"Employee with Id = {id} not found");
+
+
+                tmp.Name = todo.Name;
+                tmp.Completed = todo.Completed;
+                tmp.CurrentDay = todo.CurrentDay;
                 tmp.Deadline = todo.Deadline;
 
                 await _todo.SaveChangesAsync();
