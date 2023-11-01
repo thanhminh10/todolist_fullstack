@@ -9,6 +9,10 @@ namespace todolist_BE.Data
         
         }
         public DbSet<Todo> Todos { get; set; }
-         
+
+        internal Task GetTodobyID(string id)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

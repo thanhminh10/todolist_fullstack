@@ -37,8 +37,8 @@ export const sortbyAdded = (todo) => {
 
         
         for (let j = i + 1; j < todo.length; j++) {
-            date1 =  new Date(todo[currentValueNewIndex].currentDay.string);
-            date2 = new Date(todo[j].currentDay.string);
+            date1 =  new Date(todo[currentValueNewIndex].currentDay);
+            date2 = new Date(todo[j].currentDay);
             if (
                 date1 > date2
             ) {
@@ -66,8 +66,8 @@ export const sortbydeadline = (todo) => {
 
         
         for (let j = i + 1; j < todo.length; j++) {
-            date1 =  new Date(todo[currentValueNewIndex].deadline.string);
-            date2 = new Date(todo[j].deadline.string);
+            date1 =  new Date(todo[currentValueNewIndex].deadline);
+            date2 = new Date(todo[j].deadline);
             if (
                 date1 > date2
             ) {
@@ -101,15 +101,17 @@ export const remainingSeach = createSelector(
     (todoList, searchtext ,filter_status,sortSelector) =>  {
         if(sortSelector ==="Added date")
         {
-            // console.log(todoList);
-            return sortbyAdded(todoList.Todo.filter((todo)=>{
-                if(filter_status==='All'){
-                    return todo.name.includes(searchtext)
-                }
-                else {
-                    return todo.name.includes(searchtext) && checkstatus(filter_status,todo);
-                }
-            }))
+           
+           if(todoList.Todo) {
+               return sortbyAdded(todoList.Todo.filter((todo)=>{
+                   if(filter_status==='All'){
+                       return todo.name.includes(searchtext)
+                   }
+                   else {
+                       return todo.name.includes(searchtext) && checkstatus(filter_status,todo);
+                   }
+               }))
+           }
         }
         else {
             return sortbydeadline(todoList.Todo.filter((todo)=>{
@@ -122,6 +124,6 @@ export const remainingSeach = createSelector(
             }))
         }
     }
-    )
+)
     
 
